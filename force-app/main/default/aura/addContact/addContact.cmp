@@ -1,0 +1,25 @@
+<aura:component implements="flexipage:availableForAllPageTypes"  access="global">
+    
+    <!-- Last updated by Steve Nabors 5/16/2020-->
+    <div class="slds-box slds-theme--default">
+        <lightning:card title="Add Employees" iconName="standard:contact" >
+            <lightning:recordEditForm aura:id="editForm"
+                                      objectApiName="Contact"
+                                      onsuccess="{!c.handleSuccess}">
+                <lightning:inputField aura:id="field" fieldName="Name" />
+                <lightning:inputField aura:id="field" fieldName="Employee_Number__c" />
+                <lightning:inputField aura:id="field" fieldName="Title" />
+                <lightning:inputField aura:id="field" fieldName="Phone" />
+                <lightning:inputField aura:id="field" fieldName="Email" />
+                <lightning:inputField aura:id="field" fieldName="Location__c" />
+                <lightning:inputField aura:id="field" fieldName="Trailhead_Profile__c" />
+                <lightning:messages />
+                <lightning:buttonGroup class="slds-align_absolute-center slds-p-top_small">
+                    <lightning:button variant="brand" type="submit" label="Add Employee" iconName="utility:add" />
+                    <lightning:button variant="neutral" type="reset" label="Clear/Cancel"/>
+                </lightning:buttonGroup>
+            </lightning:recordEditForm>
+        </lightning:card>
+    </div>
+    
+</aura:component>

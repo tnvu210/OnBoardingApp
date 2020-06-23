@@ -1,0 +1,119 @@
+<!--<apex:page standardController="Training_Catalog_Assignment__c" 
+           id="thePage" tabstyle="Training_Catalog_Assignment__c" sidebar="true"
+           lightningStylesheets="true" extensions="TrackTrainingStatus_Extension">  -->
+<apex:page Controller="TrackTrainingStatus_Extension" id="thePage"
+           tabstyle="Training_Catalog_Assignment__c" sidebar="true" lightningStylesheets="true">
+            
+            <!--
+            <apex:form id="theForm">
+                <apex:pageBlock id="thePageBlock" title="Track Training Course Assigned For Employees"> 
+                    <apex:pageBlockTable value="{!records}" var="record" id="thePageBlockTable">
+               
+                        <apex:column >
+                            <apex:outputField value="{!record.Employee__c}"/> 
+                            <apex:facet name="header">Name</apex:facet>
+                        </apex:column>
+                        <apex:column >
+                            <apex:outputField value="{!record.Training_Catalog__c}" /> 
+                            <apex:facet name="header">Course Name</apex:facet>
+                        </apex:column>
+                        <apex:column >
+                            <apex:outputField value="{!record.Status__c}"/>  
+                            <apex:facet name="header">Status</apex:facet>
+                        </apex:column>
+                        <apex:column >
+                            <apex:outputField value="{!record.Start_Date__c}"/>  
+                            <apex:facet name="header">Start Date</apex:facet>
+                        </apex:column>
+                        <apex:column >
+                            <apex:outputField value="{!record.End_Date__c}"/>  
+                            <apex:facet name="header">End Date</apex:facet>
+                        </apex:column>
+                        <apex:inlineEditSupport event="ondblClick" />
+                    </apex:pageBlockTable> 
+                    <apex:pageBlockButtons location="bottom"> 
+                        <apex:commandButton value="Submit" action="{!save}" onclick="alert('Any changes on Status field will be submited for approval (Approval Process not set up yet')" id="saveButton" />
+                        <apex:commandButton value="Cancel" action="{!cancel}" id="cancelButton" />
+                    </apex:pageBlockButtons> 
+                </apex:pageBlock> 
+            </apex:form>
+            -->
+    
+    <apex:form id="theForm2">
+        <apex:pageBlock id="thePageBlock" title="Track Training Course Assigned For Employees">
+            <apex:pageBlockSection title="Pick a Status" collapsible="false">
+                <apex:selectList value="{!selectedValue}" multiselect="false" size="1">
+                    <apex:selectOptions value="{!valueOptions}"/>
+                    <apex:actionSupport event="onchange" reRender="output" action="{!getResults}"/>
+                    
+                </apex:selectList>
+            </apex:pageBlockSection>
+            
+           
+            <apex:outputPanel id="output">
+             <apex:repeat value="{!courseToContact}" var="key">
+                 <apex:pageBlockTable value="{!courseToContact[key].tcaList}" var="keyvalue" id="thePageBlockTable" columns="5" columnsWidth="180">
+                     <apex:column rowspan="{!courseToContact[key].numOfCourses}"
+                                  style="display:{!IF(CASESAFEID(keyvalue.id)==CASESAFEID(courseToContact[key].firstOfList), 
+                                         'table-data','none' )};">
+                                <apex:outputField value="{!keyvalue.Employee__c}"/> 
+                                <apex:facet name="header">Name</apex:facet>
+                     </apex:column>
+                     <apex:column width="600">
+                            <apex:outputField value="{!keyvalue.Training_Catalog__c}" /> 
+                            <apex:facet name="header">Course Name</apex:facet>
+                     </apex:column>
+                     <apex:column width="150">
+                         <apex:outputField value="{!keyvalue.Status__c}"/>  
+                         <apex:facet name="header">Status</apex:facet>
+                     </apex:column>
+                     <apex:column width="150">
+                         <apex:outputField value="{!keyvalue.Start_Date__c}"/>  
+                         <apex:facet name="header">Start Date</apex:facet>
+                     </apex:column>
+                     <apex:column width="150">
+                         <apex:outputField value="{!keyvalue.End_Date__c}"/>  
+                         <apex:facet name="header">End Date</apex:facet>
+                     </apex:column>
+                     <apex:inlineEditSupport event="ondblClick" />
+                </apex:pageBlockTable>
+            </apex:repeat>
+            </apex:outputPanel>
+            <apex:pageBlockButtons location="bottom"> 
+                <apex:commandButton value="Submit" action="{!save}" onclick="alert('Any changes on Status field will be submited for approval (Approval Process not set up yet')" id="saveButton" />
+                <apex:commandButton value="Cancel" action="{!cancel}" id="cancelButton" />
+            </apex:pageBlockButtons>
+            
+            
+            <!-- I tried to do this way but there was an error ----------------
+            <table style="width:100%;" value="{!CoursesByContact[key].tacList}" var="keyvalue" id="thePageBlockTable">
+                <tbody >
+                    <tr>
+                        <th style="border-bottom: medium solid black; border-right: medium solid black;">Name </th>
+                        <th style="border-bottom: medium solid black; border-right: medium solid black;">Course Name</th>
+                        <th style="border-bottom: medium solid black; border-right: medium solid black;">Status</th>
+                        <th style="border-bottom: medium solid black; border-right: medium solid black;">Start Date</th>
+                        <th style="border-bottom: medium solid black; border-right: medium solid black;">End Date</th>
+                    </tr>
+                    
+                    <apex:repeat value="{!CoursesByContact}" var="key">
+                        <tr rowspan="{!CoursesByContact[key].numOfCourses}"
+                            style="display:{!IF(CASESAFEID(keyvalue.id)==CASESAFEID(CoursesByContact[key].firstOfList), 
+                                   'table-data','none' )};">>
+                            <td style="border-bottom: thin solid black; border-right: thin solid black;"> <apex:outputField value="{!keyvalue.Employee__c}" /></td>
+                            <td style="border-bottom: thin solid black; border-right: thin solid black;"><apex:outputField value="{!keyvalue.Training_Catalog__c}" /></td>
+                            <td style="border-bottom: thin solid black; border-right: thin solid black;"><apex:outputField value="{!keyvalue.Status__c}"/></td>
+                            <td style="border-bottom: thin solid black; border-right: thin solid black;"><apex:outputField value="{!keyvalue.Start_Date__c}" /></td>
+                            <td style="border-bottom: thin solid black; border-right: thin solid black;"><apex:outputField value="{!keyvalue.End_Date__c}"/></td>
+                        </tr>
+                    </apex:repeat>
+                </tbody>
+            </table>
+			-->
+            
+            
+
+        </apex:pageBlock>                
+    </apex:form>
+
+</apex:page>

@@ -1,0 +1,23 @@
+<apex:page controller="OnboardingAppWebPage" lightningStylesheets="true">
+    <apex:pageMessages />
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Tracking Training Courses and Projects Status" collapsible="false">
+                <apex:selectList value="{!selectedValue}" multiselect="false" size="1">
+                    <apex:selectOptions value="{!valueOptions}"/>
+                </apex:selectList>
+            </apex:pageBlockSection>
+            
+            <apex:commandlink action="{!switchPage}">
+                <apex:commandButton style="background:#4CAF50; color:white" value="Go"/>
+            </apex:commandlink>
+            <apex:commandButton style="background:#4CAF50; color:white" value="Clear" action="{!clearValue}"/>
+            <!-- <apex:commandButton style="background:#4CAF50; color:white" value="Cancel" action="{!redirectToPreviousPage}"/> -->
+            <apex:commandlink action="{!redirectToHomePage}" target="_blank">
+                <apex:commandButton style="background:#4CAF50; color:white" value="Back"/>
+            </apex:commandlink>
+        </apex:pageBlock>
+       
+    </apex:form>
+    
+</apex:page>

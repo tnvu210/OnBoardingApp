@@ -1,0 +1,82 @@
+<!--apex:page standardController="Project_Member__c"  recordSetVar="records"
+           id="thePage" tabstyle="Project_Member__c" sidebar="true"
+           lightningStylesheets="true" extensions="TrackProjectStatus_Extension"-->
+
+<apex:page id="thePage" tabstyle="Project_Member__c" sidebar="true"
+           lightningStylesheets="true" Controller="TrackProjectStatus_Extension">
+		            
+            <!-- apex:form id="theForm">
+                <apex:pageBlock id="thePageBlock" title="Track Project Assigned For Employees"> 
+                    <apex:pageBlockTable value="{!records}" var="record" id="thePageBlockTable">
+               			<apex:column >
+                            <apex:outputField value="{!record.Project__c}" /> 
+                            <apex:facet name="header">Project Name</apex:facet>
+                        </apex:column>
+                        <apex:column >
+                            <apex:outputField value="{!record.Contact__c}"/> 
+                            <apex:facet name="header">Name</apex:facet>
+                        </apex:column>
+                        
+                        <apex:column >
+                            <apex:outputField value="{!record.Status__c}"/>  
+                            <apex:facet name="header">Status</apex:facet>
+                        </apex:column>
+                        <apex:column >
+                            <apex:outputField value="{!record.Assignment_Start__c}"/>  
+                            <apex:facet name="header">Start Date</apex:facet>
+                        </apex:column>
+                        <apex:column >
+                            <apex:outputField value="{!record.Assignment_End__c}"/>  
+                            <apex:facet name="header">End Date</apex:facet>
+                        </apex:column>
+                        <apex:inlineEditSupport event="ondblClick" />
+                    </apex:pageBlockTable> 
+                    <apex:pageBlockButtons location="bottom"> 
+                        <apex:commandButton value="Submit" action="{!save}" onclick="alert('Any changes on Status field will be submited for approval (Approval Process not set up yet')" id="saveButton" />
+                        <apex:commandButton value="Cancel" action="{!cancel}" id="cancelButton" />
+                    </apex:pageBlockButtons> 
+                </apex:pageBlock> 
+            </apex:form -->
+         
+   
+    <apex:form id="theForm2">
+        <apex:pageBlock id="thePageBlock" title="Track Project Assigned For Employees">
+            
+             <apex:repeat value="{!projectToContact}" var="key" >
+                 <apex:pageBlockTable value="{!projectToContact[key].pmList}" var="keyvalue" id="thePageBlockTable" columns="5" columnsWidth="500">
+                     <apex:column rowspan="{!projectToContact[key].numOfContacts}"
+                                  style="display:{!IF(CASESAFEID(keyvalue.id)==CASESAFEID(projectToContact[key].firstOfList), 
+                                         'table-data','none' )};">
+                                <apex:outputField value="{!keyvalue.Project__c}"/> 
+                                <apex:facet name="header">Project Name</apex:facet>
+                     </apex:column>
+                     <apex:column width="250">
+                            <apex:outputField value="{!keyvalue.Team__c}" /> 
+                            <apex:facet name="header">Name</apex:facet>
+                     </apex:column>
+                     <apex:column width="150">
+                         <apex:outputField value="{!keyvalue.Status__c}"/>  
+                         <apex:facet name="header">Status</apex:facet>
+                     </apex:column>
+                     <apex:column width="150">
+                         <apex:outputField value="{!keyvalue.Assignment_Start__c}"/>  
+                         <apex:facet name="header">Start Date</apex:facet>
+                     </apex:column>
+                     <apex:column width="150">
+                         <apex:outputField value="{!keyvalue.Assignment_End__c}"/>  
+                         <apex:facet name="header">End Date</apex:facet>
+                     </apex:column>
+                     <apex:inlineEditSupport event="ondblClick" />
+                </apex:pageBlockTable>
+            </apex:repeat>
+            <apex:pageBlockButtons location="bottom"> 
+                <apex:commandButton value="Submit" action="{!save}" onclick="alert('On Hold Status will be submited for approval')" id="saveButton" />
+                <apex:commandButton value="Cancel" action="{!cancel}" id="cancelButton" />
+            </apex:pageBlockButtons>
+            
+          
+        </apex:pageBlock>                
+    </apex:form>
+
+
+</apex:page>

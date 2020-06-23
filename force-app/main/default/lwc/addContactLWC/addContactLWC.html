@@ -1,0 +1,23 @@
+<template>
+    <div class="slds-box slds-theme--default">
+        <lightning-card title="Add Employees" icon-name="standard:contact">
+            <lightning-record-edit-form object-api-name={contactObject} onsuccess={handleSuccess}>
+                <lightning-input-field field-name={name}></lightning-input-field>
+                <lightning-input-field field-name={employeenumber}></lightning-input-field>
+                <lightning-input-field field-name={title}></lightning-input-field>
+                <lightning-input-field field-name={phone}></lightning-input-field>
+                <lightning-input-field field-name={email}></lightning-input-field>
+                <lightning-input-field field-name={location}></lightning-input-field>
+                <lightning-input-field field-name={trailhead}></lightning-input-field>
+                <lightning-messages></lightning-messages>
+                <div class="slds-align_absolute-center">
+                    <lightning-button class="slds-m-bottom_small" type="submit" variant="brand" label="Add Employee"
+                        icon-name="utility:add"></lightning-button>
+                    <lightning-button class="slds-m-bottom_small" label="Cancel" variant="neutral"
+                        onclick={handleReset}></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+
+        </lightning-card>
+    </div>
+</template>
